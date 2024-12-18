@@ -43,7 +43,35 @@ test('tc03',async({page})=>{
     await page.getByText('Broken Links - Images').click()
     await expect (page.locator('img').nth(3)).toBeVisible()
 })
-test('tc04',async({page})=>{
+test('tc04', async ({ page }) => {
+    await page.goto('https://demoqa.com/');
+    await page.getByRole('heading', { name: 'Forms' }).click();
+    await page.getByText('Practice Form').click();
+    await page.getByPlaceholder('First Name').fill('Gerimedica');
+    await page.getByPlaceholder('Last Name').fill('BV');
+    await page.getByPlaceholder('name@example.com').fill('testa@test.com');
+    await page.getByText('Male', { exact: true }).click();
+    await page.getByPlaceholder('Mobile Number').fill('0123456789');
+    await page.locator('#dateOfBirthInput').click();
+    await page.locator('.react-datepicker__month-select').selectOption('January');
+    await page.locator('.react-datepicker__year-select').selectOption('1990');
+    await page.getByLabel('Choose Monday, January 15th,').click();
+    const subjectsInput = page.locator('input[id="subjectsInput"]')
+    await subjectsInput.type('Maths', { delay: 100 });
+    await page.locator('#react-select-2-option-0').click()
+    await page.getByText('Reading').click()
+    await page.locator('input[type="file"]').setInputFiles('C:/Users/owner/OneDrive/Desktop/zaaa.PNG')
+    await page.getByPlaceholder('Current Address').fill('Netherlands');
+    await page.locator('#state svg').click();
+    await page.getByText('NCR', { exact: true }).click();
+    await page.locator('#city svg').click()
+    await page.getByText('Delhi', { exact: true }).click()
+    await page.getByRole('button', { name: 'Submit' }).click()
+    await expect(page.getByText('Thanks for submitting the form')).toBeTruthy
+
+  });
+  
+/*test('tc04',async({page})=>{
     await (page.goto('https://demoqa.com/'))
     await page.getByRole('heading', { name: 'Forms' }).click()
     await page.getByText('Practice Form').click()
@@ -62,12 +90,13 @@ test('tc04',async({page})=>{
     const fileInput = await page.locator('input[type="file"]')
     const imagePath = 'C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG'
     await fileInput.setInputFiles(imagePath);
-
+    //await page.locator('input[type="file"]').click()
+    //await page.setInputFiles('C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG')
     //await page.locator('[type="file"]').click()//.setInputFiles('C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG')
     await page.getByPlaceholder('Current Address').fill('Netherlands')
     await page.locator('#state svg').click()
     await page.getByText('NCR', { exact: true }).click()
     await page.locator('#city svg').click()
     await page.getByText('Delhi', { exact: true }).click()
-})
+})*/
 })
