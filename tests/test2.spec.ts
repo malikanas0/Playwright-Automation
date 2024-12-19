@@ -1,7 +1,24 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-test('tc04 - File Upload Debugging', async ({ page }) => {
+test('tc06', async ({ page }) => {
+  // Navigate to the page
+  await page.goto('https://demoqa.com/');
+
+  // Click on "Widgets"
+  await page.getByRole('heading', { name: 'Widgets' }).click();
+
+  // Click on "Tool Tips"
+  await page.getByText('Tool Tips').click();
+
+  // Hover over the button
+  await page.locator('#toolTipButton').hover();
+
+  // Get the tooltip and verify its text
+  const tooltip = page.locator('.tooltip-inner')
+  await expect(tooltip).toHaveText('You hovered over the Button')
+});
+/*test('tc04 - File Upload Debugging', async ({ page }) => {
   // Dynamically resolve the file path
   const filePath = path.resolve('C:/Users/owner/OneDrive/Desktop/zaaa.PNG');
 

@@ -45,34 +45,6 @@ test('tc03',async({page})=>{
 })
 test('tc04', async ({ page }) => {
     await page.goto('https://demoqa.com/');
-    await page.getByRole('heading', { name: 'Forms' }).click();
-    await page.getByText('Practice Form').click();
-    await page.getByPlaceholder('First Name').fill('Gerimedica');
-    await page.getByPlaceholder('Last Name').fill('BV');
-    await page.getByPlaceholder('name@example.com').fill('testa@test.com');
-    await page.getByText('Male', { exact: true }).click();
-    await page.getByPlaceholder('Mobile Number').fill('0123456789');
-    await page.locator('#dateOfBirthInput').click();
-    await page.locator('.react-datepicker__month-select').selectOption('January');
-    await page.locator('.react-datepicker__year-select').selectOption('1990');
-    await page.getByLabel('Choose Monday, January 15th,').click();
-    const subjectsInput = page.locator('input[id="subjectsInput"]')
-    await subjectsInput.type('Maths', { delay: 100 });
-    await page.locator('#react-select-2-option-0').click()
-    await page.getByText('Reading').click()
-    await page.locator('input[type="file"]').setInputFiles('C:/Users/owner/OneDrive/Desktop/zaaa.PNG')
-    await page.getByPlaceholder('Current Address').fill('Netherlands');
-    await page.locator('#state svg').click();
-    await page.getByText('NCR', { exact: true }).click();
-    await page.locator('#city svg').click()
-    await page.getByText('Delhi', { exact: true }).click()
-    await page.getByRole('button', { name: 'Submit' }).click()
-    await expect(page.getByText('Thanks for submitting the form')).toBeTruthy
-
-  });
-  
-/*test('tc04',async({page})=>{
-    await (page.goto('https://demoqa.com/'))
     await page.getByRole('heading', { name: 'Forms' }).click()
     await page.getByText('Practice Form').click()
     await page.getByPlaceholder('First Name').fill('Gerimedica')
@@ -84,19 +56,40 @@ test('tc04', async ({ page }) => {
     await page.locator('.react-datepicker__month-select').selectOption('January')
     await page.locator('.react-datepicker__year-select').selectOption('1990')
     await page.getByLabel('Choose Monday, January 15th,').click()
-    //await page.locator('.subjects-auto-complete__value-container').fill('ma')
-   // await page.locator('#subjectsContainer').selectOption('Maths')
+    const subjectsInput = page.locator('input[id="subjectsInput"]')
+    await subjectsInput.type('Maths', { delay: 100 })
+    await page.locator('#react-select-2-option-0').click()
     await page.getByText('Reading').click()
-    const fileInput = await page.locator('input[type="file"]')
-    const imagePath = 'C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG'
-    await fileInput.setInputFiles(imagePath);
-    //await page.locator('input[type="file"]').click()
-    //await page.setInputFiles('C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG')
-    //await page.locator('[type="file"]').click()//.setInputFiles('C:\\Users\\owner\\OneDrive\\Desktop\\zaaa.PNG')
+    await page.locator('input[type="file"]').setInputFiles('C:/Users/owner/OneDrive/Desktop/zaaa.PNG')
     await page.getByPlaceholder('Current Address').fill('Netherlands')
     await page.locator('#state svg').click()
     await page.getByText('NCR', { exact: true }).click()
     await page.locator('#city svg').click()
     await page.getByText('Delhi', { exact: true }).click()
-})*/
+    await page.getByRole('button', { name: 'Submit' }).click()
+    await expect(page.getByText('Thanks for submitting the form')).toBeTruthy
+  })
+  test('tc05',async({page})=>{
+    await page.goto('https://demoqa.com/')
+    await page.getByRole('heading', { name: 'Widgets' }).click()
+    await page.getByText('Progress Bar').click()
+    await page.getByRole('button', { name: 'Start' }).click()
+    await page.locator('#progressBar')
+    await page.waitForTimeout(10000) // Waits for 5 seconds
+    await expect(page.getByText('%')).toHaveText('100%')
+  })
+  test('tc06',async({page})=>{
+    await page.goto('https://demoqa.com/')
+    await page.getByRole('heading', { name: 'Widgets' }).click()
+    await page.getByText('Tool Tips').click()
+    await page.locator('#toolTipButton').hover()
+    const tooltip = page.locator('.tooltip-inner')
+    await expect(tooltip).toHaveText('You hovered over the Button')
+  })
+  test('tc07',async({page})=>{
+    await page.goto('https://demoqa.com/')
+    await page.getByRole('heading', { name: 'Interactions' }).click()
+    await page.getByText('Droppable').click()
+    await page.locator('#draggable').dragTo(page.locator('#droppable'))
+  })
 })
