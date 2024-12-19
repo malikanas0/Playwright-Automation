@@ -1,6 +1,19 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
+test('tc07',async({page})=>{
+  await page.goto('https://demoqa.com/')
+  await page.getByRole('heading', { name: 'Interactions' }).click()
+  await page.getByText('Droppable').click()
+  await page.locator('#draggable').hover()
+  await page.waitForTimeout(3000)
+const droppable = page.getByText('Simple').locator('#droppable');
+await droppable.hover();
+
+
+
+})
+/*
 test('tc06', async ({ page }) => {
   // Navigate to the page
   await page.goto('https://demoqa.com/');

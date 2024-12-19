@@ -90,6 +90,14 @@ test('tc04', async ({ page }) => {
     await page.goto('https://demoqa.com/')
     await page.getByRole('heading', { name: 'Interactions' }).click()
     await page.getByText('Droppable').click()
-    await page.locator('#draggable').dragTo(page.locator('#droppable'))
+    await page.getByText('Simple').click()
+    const draggable = page.locator('#draggable');
+  const droppable = page.locator('#simpleDropContainer #droppable'); // Refined selector for the "Simple" section
+  await draggable.dragTo(droppable)
+  await expect(droppable).toHaveText('Dropped!');
+      /*await page.locator('#draggable').hover()
+      await page.mouse.down()
+      await page.locator('#droppable').hover()
+      await page.mouse.up()*/
   })
 })
