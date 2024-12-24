@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -12,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 60000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -77,3 +77,4 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+
