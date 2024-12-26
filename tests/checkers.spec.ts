@@ -5,6 +5,7 @@ test.describe('checker automation with playwright',()=>{
       await page.locator('[name="space62"]').click()
       await page.locator('[name="space73"]').click()
       await page.waitForTimeout(4000)
+      //await page.waitForSelector('[name="space73"][src*="you2.gif"]')
       await page.locator('[name="space22"]').click()
       await page.locator('[name="space13"]').click()
       await page.waitForTimeout(2000)
@@ -32,6 +33,7 @@ test.describe('checker automation with playwright',()=>{
       await page.locator('[name="space26"]').click()
       await page.locator('[name="space37"]').click()
       await page.waitForTimeout(4000)
+      await expect(page.locator('[name="space37"]')).toHaveAttribute('src', 'you1k.gif');
     })
   })
 
