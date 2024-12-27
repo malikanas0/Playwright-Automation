@@ -14,8 +14,8 @@ export class CheckersPage {
 
   // Perform a move and assert the state
   async movePiece(from: string, to: string, expectedSrc: string) {
-    await this.page.locator(`[name="${from}"]`).click();
-    await this.page.locator(`[name="${to}"]`).click();
-    await expect(this.page.locator(`[name="${to}"]`)).toHaveAttribute("src", expectedSrc);
+    await this.page.locator(`[name="space${from}"]`).click();
+    await this.page.locator(`[name="space${to}"]`).click();
+    await expect(this.page.locator(`[name="space${to}"]`)).toHaveAttribute("src", expectedSrc);
   }
 }
