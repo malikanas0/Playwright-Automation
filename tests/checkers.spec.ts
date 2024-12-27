@@ -1,4 +1,28 @@
-import {test ,expect} from "@playwright/test";
+import { test } from "@playwright/test"
+import { CheckersPage } from "../utility/checkers"
+
+test.describe("Checker automation with Playwright", () => {
+  test("Automate Checkers game", async ({ page }) => {
+    const checkersPage = new CheckersPage(page)
+
+    // Navigate to the game
+    await checkersPage.navigate()
+
+    // Perform moves
+    await checkersPage.movePiece("space62", "space73", "you1.gif") 
+    await checkersPage.movePiece("space22", "space13", "you1.gif") 
+    await checkersPage.movePiece("space51", "space62", "you1.gif") 
+    await checkersPage.movePiece("space42", "space24", "you1.gif") 
+    await checkersPage.movePiece("space13", "space04", "you1.gif") 
+    await checkersPage.movePiece("space02", "space13", "you1.gif") 
+    await checkersPage.movePiece("space04", "space15", "you1.gif") 
+    await checkersPage.movePiece("space11", "space02", "you1.gif") 
+    await checkersPage.movePiece("space15", "space26", "you1.gif") 
+    await checkersPage.movePiece("space26", "space37", "you1k.gif") 
+  }) 
+}) 
+
+/*import {test ,expect} from "@playwright/test";
 test.describe('checker automation with playwright',()=>{
     test('Automate checkers game',async({page})=>{
      await page.goto('https://www.gamesforthebrain.com/game/checkers/')
