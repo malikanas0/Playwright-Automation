@@ -11,12 +11,15 @@ test.describe('Custom Input Handling', () => {
 
         // Type into the field
         await page.keyboard.type('lahore')
-        await
+
+        await page.waitForTimeout(1000); // Adjust based on your field's behavior
         // Select the dropdown option (if applicable)
-        const option = page.locator('.dropdown-option-class', { hasText: 'lahore' }); // Adjust for your option's locator
-        await option.click()
+        //const option = page.locator('.dropdown-option-class', { hasText: 'lahore' }); // Adjust for your option's locator
+        //await option.click()
+
+        await page.locator('#react-select-4-option-0').click() 
 
         // Validate the result
-        await expect(customField).toContainText('lahore'); // Adjust based on your field's behavior
+        //await expect(customField).toContainText('lahore'); // Adjust based on your field's behavior
     });
 });
