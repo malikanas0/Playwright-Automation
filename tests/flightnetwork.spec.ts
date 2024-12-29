@@ -90,4 +90,9 @@ test.describe('Flight Network',()=>{
         await page.getByTestId('searchForm-searchFlights-button').click()
         await page.waitForTimeout(2000)
     })
+    test('tc04',async({page})=>{
+        await page.goto('https://us-en.flightnetwork.com/rf/start')
+        await page.getByRole('button', { name: 'Accept All' }).click()
+        await page.waitForTimeout(1000)
+    })
 })
