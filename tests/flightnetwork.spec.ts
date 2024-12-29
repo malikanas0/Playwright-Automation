@@ -94,5 +94,6 @@ test.describe('Flight Network',()=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()
         await page.waitForTimeout(1000)
+        await page.getByTestId('menu-link-Hotels').click()
     })
 })
