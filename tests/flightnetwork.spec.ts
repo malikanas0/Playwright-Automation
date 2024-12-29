@@ -58,5 +58,13 @@ test.describe('Flight Network',()=>{
         await page.keyboard.type('lahore')
         await page.waitForTimeout(1000)
         await page.locator('#react-select-14-option-0').click()
+        await page.getByTestId('searchForm-multiBound[0]-destination-input').locator('div').filter({ hasText: 'To' }).nth(3).click()
+        await page.keyboard.type('karachi')
+        await page.waitForTimeout(1000)
+        await page.locator('#react-select-19-option-0').click()
+        await page.waitForTimeout(1000)
+        await page.getByTestId('multiBound[0].departureDate-input').click()
+        await page.getByLabel('Go to next month').click()
+        
     })
 })
