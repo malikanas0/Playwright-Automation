@@ -24,7 +24,10 @@ test.describe('Flight Network',()=>{
         await page.getByRole('option', { name: 'Premium' }).click()
         await page.getByTestId('directFlight-input').click()
         await page.getByTestId('searchForm-searchFlights-button').click()
-        await page.waitForTimeout(1000)
+        await page.waitForTimeout(3000)
+        await page.getByTestId('view-trip-button').nth(0).click()
+        await page.getByTestId('trip-details-button').click()
+        
     })
     test('tc02',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
@@ -114,6 +117,11 @@ test.describe('Flight Network',()=>{
     test('tc05',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()
+        await page.getByTestId('menu-link-Rental car').click()
+        await page.waitForTimeout(2000)
+        await page.getByTestId('searchbox-toolbox-fts-pickup').fill('islamabad')
+        await page.getByTestId('searchbox-toolbox-date-picker-pickup-date-value').click()
+        // await page.waitForLoadState()
         //await page.waitForEvent('load')
     })
 })
