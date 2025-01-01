@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 test.describe('Flight Network',()=>{
     test('tc01',async({page})=>{
+        
         await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()
         await page.getByTestId('searchForm-singleBound-origin-input').locator('div').filter({ hasText: 'From' }).nth(3).click()
@@ -24,10 +25,17 @@ test.describe('Flight Network',()=>{
         await page.getByRole('option', { name: 'Premium' }).click()
         await page.getByTestId('directFlight-input').click()
         await page.getByTestId('searchForm-searchFlights-button').click()
-        await page.waitForTimeout(3000)
+        await page.waitForTimeout(1000)
         await page.getByTestId('view-trip-button').nth(0).click()
         await page.getByTestId('trip-details-button').click()
-        
+        await page.getByTestId('FLEXIBLE_TICKET-button').click()
+        await page.waitForTimeout(4000)
+        await page.getByTestId('traveler-email-input').fill('malikanassultan@gmail.com')
+        await page.getByTestId('traveler-email-confirm-input').fill('malikanassultan@gmail.com')
+        await page.getByTestId('travelerDetails-contactInformation-phoneCountryId-combobox-button').click()
+        await page.getByRole('option', { name: 'Pakistan (+92)' }).click()
+        await page.getByTestId('traveler-phone-input').fill('03201454667')
+        await page.getByLabel('No, I do not want to receive').click()
     })
     test('tc02',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
@@ -132,5 +140,8 @@ test.describe('Flight Network',()=>{
         await page.waitForTimeout(1000)
         // await page.waitForLoadState()
         //await page.waitForEvent('load')
+    })
+    test('tc06',async({page})=>{
+
     })
 })
