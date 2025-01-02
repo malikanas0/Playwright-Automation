@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 test.describe('Flight Network',()=>{
     test('tc01',async({page})=>{
-        
-        await page.goto('https://us-en.flightnetwork.com/rf/start')
-        await page.getByRole('button', { name: 'Accept All' }).click()
+        await expect(page.goto('https://us-en.flightnetwork.com/rf/start')).toBeTruthy()
+        const acceptbtn = page.getByRole('button', { name: 'Accept All' }).click()
+        await expect(acceptbtn).toBeTruthy()
         await page.getByTestId('searchForm-singleBound-origin-input').locator('div').filter({ hasText: 'From' }).nth(3).click()
         await page.keyboard.type('lahore')
         await page.waitForTimeout(1000)
-        await page.locator('#react-select-4-option-0').click()
+        const selectbtn = page.locator('#react-select-4-option-0').click()
+        await expect(selectbtn).toBeTruthy()
         await page.getByTestId('searchForm-singleBound-destination-input').locator('div').filter({ hasText: 'To' }).nth(3).click()
         await page.keyboard.type('karachi')
         await page.waitForTimeout(1000)
