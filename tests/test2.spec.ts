@@ -1,4 +1,69 @@
 import { test, expect } from '@playwright/test';
+
+test('Flight Booking with Assertions', async ({ page }) => {
+    // Navigate to the website
+    await page.goto('https://us-en.flightnetwork.com/rf/start');
+    await expect(page).toHaveURL('https://us-en.flightnetwork.com/rf/start');
+    
+    // Accept Cookies
+    const acceptBtn = page.getByRole('button', { name: 'Accept All' });
+    await expect(acceptBtn).toBeVisible();
+    await acceptBtn.click();
+
+    // Fill Origin Input
+    const originInput = page.getByTestId('searchForm-singleBound-origin-input');
+    await originInput.click();
+    await page.keyboard.type('lahore');
+    await expect(page.locator('#react-select-4-option-0')).toBeVisible();
+    await page.locator('#react-select-4-option-0').click();
+    
+    // Fill Destination Input
+    const destinationInput = page.getByTestId('searchForm-singleBound-destination-input');
+    await destinationInput.click();
+    await page.keyboard.type('karachi');
+    await expect(page.locator('#react-select-7-option-0')).toBeVisible();
+    await page.locator('#react-select-7-option-0').click();
+
+    // Select Dates
+    const departureDateInput = page.getByTestId('singleBound.departureDate-input');
+    await expect(departureDateInput).toBeVisible();
+    await departureDateInput.click();
+    await page.getByRole('gridcell', { name: '31 $' }).click();
+    await page.getByLabel('Go to next month').click();
+    await page.getByRole('gridcell', { name: '3 $', exact: true }).click();
+    await page.waitForTimeout(1000)
+
+    // Select Passengers
+    const passengersDropdown = page.getByTestId('searchForm-passengers-dropdown');
+    await expect(passengersDropdown).toBeVisible();
+    await passengersDropdown.click();
+    await page.getByTestId('adults-passengers-add').click();
+    await page.getByTestId('children-passengers-add').click();
+    await page.getByTestId('infants-passengers-add').click();
+
+    // Select Cabin Class
+    const cabinDropdown = page.getByTestId('searchForm-cabinClasses-dropdown');
+    await expect(cabinDropdown).toBeVisible();
+    await cabinDropdown.click();
+    await page.getByRole('option', { name: 'Premium' }).click();
+
+    // Verify and Click Search
+    const searchButton = page.getByTestId('searchForm-searchFlights-button');
+    await expect(searchButton).toBeVisible();
+    await searchButton.click();
+
+    // View Trip
+    const viewTripButton = page.locator('text=View Trip').first();
+    await expect(viewTripButton).toBeVisible();
+    await viewTripButton.click();
+
+    // Verify Contact Form
+    const emailInput = page.getByTestId('traveler-email-input');
+    await emailInput.fill('test@example.com');
+    await expect(emailInput).toHaveValue('test@example.com');
+});
+
+/*import { test, expect } from '@playwright/test';
 import path from 'path';
 
 test('tc07',async({page})=>{
