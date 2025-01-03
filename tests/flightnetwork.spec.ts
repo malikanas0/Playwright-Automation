@@ -19,7 +19,7 @@ test.describe('Flight Network',()=>{
         await page.getByLabel('Go to next month').click()
         await page.waitForTimeout(1000)
         await page.getByRole('gridcell', { name: '7 $', exact: true }).click()
-        /*await page.getByTestId('searchForm-passengers-dropdown').click()
+        await page.getByTestId('searchForm-passengers-dropdown').click()
         await page.getByTestId('adults-passengers-add').click()
         await page.getByTestId('children-passengers-add').click()
         await page.getByTestId('infants-passengers-add').click()
@@ -37,7 +37,7 @@ test.describe('Flight Network',()=>{
         await page.getByTestId('travelerDetails-contactInformation-phoneCountryId-combobox-button').click()
         await page.getByRole('option', { name: 'Pakistan (+92)' }).click()
         await page.getByTestId('traveler-phone-input').fill('03201454667')
-        await page.getByLabel('No, I do not want to receive').click()*/
+        await page.getByLabel('No, I do not want to receive').click()
     })
     test('tc02',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')

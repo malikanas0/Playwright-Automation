@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { executionAsyncId } from 'async_hooks';
 import exp from 'constants';
 
 test.describe('Flight with assertion', () => {
@@ -33,19 +34,45 @@ test.describe('Flight with assertion', () => {
         await departureDate.click()
         
         const firstDate = page.getByRole('gridcell', { name: '6 $', exact: true })
-        await expect(firstDate).toBeVisible()
         await firstDate.click()
+        await expect(departureDate).toHaveValue('2025-01-06')
 
-        const monthclick = page.getByLabel('Go to next month')
-        await expect(monthclick).toBeVisible()
-        await monthclick.click()
+        const returndate = page.getByTestId('singleBound.returnDate-input')
 
-        const lastdate = page.getByRole('gridcell', { name: '5 $', exact: true })
+        //const monthclick = page.getByLabel('Go to next month')
+        //await expect(monthclick).toBeVisible()
+        //await monthclick.click()
+
+        const lastdate = page.getByRole('gridcell', { name: '16 $' })
         await expect(lastdate).toBeVisible()
         await lastdate.click()
+
+        await expect(returndate).toHaveValue('2025-01-16')
 
         const slectadult = page.getByTestId('searchForm-passengers-dropdown')
         await expect(slectadult).toHaveText('1 adult')
         await slectadult.click()
+        const addadult = page.getByTestId('adults-passengers-add')
+        await addadult.click()
+        await expect(slectadult).toHaveText('2 adults')
+        const addchild = page.getByTestId('children-passengers-add')
+        await addchild.click()
+        await expect(slectadult).toHaveText('2 adults, 1 child')
+        const addinfant = page.getByTestId('infants-passengers-add')
+        await addinfant.click()
+        await expect(slectadult).toHaveText('2 adults, 1 child, 1 infant')
+
+        const classbook = page.getByTestId('searchForm-cabinClasses-dropdown')
+        await classbook.click()
+        const optprem = page.getByTestId('etiDropdownOption')
+        await optprem.nth(1).click()
+        await expect(classbook).toHaveText('Premium')
+
+        const nonstopcheckbox = page.locator('.css-12v1e3v')
+        await expect(nonstopcheckbox).toHaveText('Nonstop flights only')
+        await nonstopcheckbox.click()
+        
+        const clicksearchfligt = page.locator('.b0x94f1')
+        await clicksearchfligt.nth(2).click()
     })
 })
