@@ -43,7 +43,8 @@ test.describe('Flight Network',()=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()
         await page.waitForTimeout(1000)
-        await page.getByTestId('searchForm-oneWay-radio-label').locator('div').filter({ hasText: 'One-Way' }).click()
+        await page.getByText('One-Way').click()
+       
         await page.getByTestId('searchForm-singleBound-origin-input').locator('div').filter({ hasText: 'From' }).nth(3).click()
         await page.keyboard.type('lahore')
         await page.waitForTimeout(1000)

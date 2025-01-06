@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { allTestCases } from '../utility/flightpageobjects';
 test.describe('Flight with assertion', () => {
+    
     test('Tc01', async ({ page }) => {
         const Alltestcases = new allTestCases(page) 
-                await page.goto('https://us-en.flightnetwork.com/rf/start')
-        await expect(page).toHaveURL('https://us-en.flightnetwork.com/rf/start')
+        await Alltestcases.sitevisit()
         await Alltestcases.acceptCookies()
         await Alltestcases.inputform()
         await Alltestcases.value()
@@ -22,6 +22,11 @@ test.describe('Flight with assertion', () => {
         await Alltestcases.selectprem()
         await Alltestcases.flightcheckbox()
         await Alltestcases.clickonsearchbtn()
-      
+    })
+    test('tc02', async({page})=>{
+        const Alltestcases = new allTestCases(page)
+        await Alltestcases.sitevisit()
+        await Alltestcases.acceptCookies()
+        await Alltestcases.clickoneway()
     })
 })

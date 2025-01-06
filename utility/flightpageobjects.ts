@@ -2,6 +2,7 @@ import { Page, expect } from "@playwright/test";
 
 export class allTestCases {
     readonly page: Page;
+    gotoweb
     acceptBtn;
     frominputfield
     dropval
@@ -20,8 +21,10 @@ export class allTestCases {
     optprem
     nonstopcheckbox
     clicksearchfligt
+    oneway
     constructor(page: Page) {
         this.page = page;
+       this.gotoweb= page.goto('https://us-en.flightnetwork.com/rf/start')
         this.acceptBtn = page.getByRole('button', { name: 'Accept All' });
         this.frominputfield = page.locator('#searchForm-singleBound-origin-input')
         this.dropval = page.locator('#react-select-4-option-0')
@@ -40,6 +43,10 @@ export class allTestCases {
         this.optprem = page.getByTestId('etiDropdownOption')
         this.nonstopcheckbox = page.locator('.css-12v1e3v')
         this.clicksearchfligt = page.locator('.b0x94f1')
+        this.oneway =page.getByText('One-Way')
+    }
+    async sitevisit(){
+        //await expect(this.gotoweb).toHaveURL('https://us-en.flightnetwork.com/rf/start')
     }
     async acceptCookies() {
         await expect(this.acceptBtn).toHaveText('Accept All');
@@ -110,6 +117,11 @@ export class allTestCases {
     }
     async clickonsearchbtn(){
         await this.clicksearchfligt.nth(2).click()
+    }
+    //second test case pom 
+    async clickoneway(){
+        await this.oneway.click()
+        await expect(this.oneway).toHaveText('One-Way')
     }
 }
 
