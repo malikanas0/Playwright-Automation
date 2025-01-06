@@ -8,6 +8,9 @@ export class allTestCases {
     toinputfield
     dorpva
     departureDate
+    firstDate
+    returndate
+    lastdate
     constructor(page: Page) {
         this.page = page;
         this.acceptBtn = page.getByRole('button', { name: 'Accept All' });
@@ -16,20 +19,19 @@ export class allTestCases {
         this.toinputfield= page.locator('#searchForm-singleBound-destination-input')
         this.dorpva = page.locator('#react-select-7-option-0')
         this.departureDate = page.getByTestId('singleBound.departureDate-input')
+        this.firstDate = page.getByRole('gridcell', { name: '6 $', exact: true })
+        this.returndate = page.getByTestId('singleBound.returnDate-input')
+        this.lastdate = page.getByRole('gridcell', { name: '16 $' })
     }
-
     async acceptCookies() {
         await expect(this.acceptBtn).toHaveText('Accept All');
         await this.acceptBtn.click();
     }
     async inputform(){
-        
         await this.frominputfield.fill('lahore')
         await expect(this.frominputfield).toBeVisible()
     }
-
     async value(){
-        
         await expect(this.dropval).toHaveText('Lahore, Pakistan')
         await this.dropval.click()
     }
@@ -44,6 +46,17 @@ export class allTestCases {
     async clickondeparturedate(){
         await expect(this.departureDate).toBeVisible()
         await this.departureDate.click()
+    }
+    async selectfirstdate(){
+        await this.firstDate.click()
+        await expect(this.departureDate).toHaveValue('2025-01-06')
+    }
+    async clickonreturndate(){
+    }
+    async selectreturndate(){
+        await expect(this.lastdate).toBeVisible()
+        await this.lastdate.click()
+        await expect(this.returndate).toHaveValue('2025-01-16')
     }
 }
 
