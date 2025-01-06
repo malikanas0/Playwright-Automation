@@ -1,22 +1,26 @@
 import { test, expect } from '@playwright/test';
-import { executionAsyncId } from 'async_hooks';
-import exp from 'constants';
-
+import { allTestCases } from '../utility/flightpageobjects';
 test.describe('Flight with assertion', () => {
     test('Tc01', async ({ page }) => {
-        await page.goto('https://us-en.flightnetwork.com/rf/start')
+        const Alltestcases = new allTestCases(page) 
+                await page.goto('https://us-en.flightnetwork.com/rf/start')
         await expect(page).toHaveURL('https://us-en.flightnetwork.com/rf/start')
-       
-        const acceptBtn = page.getByRole('button', { name: 'Accept All' })
+
+        await Alltestcases.acceptCookies()
+        /*const acceptBtn = page.getByRole('button', { name: 'Accept All' })
         await expect(acceptBtn).toHaveText('Accept All')
         await acceptBtn.click()
-        await page.waitForTimeout(1000)
+        await page.waitForTimeout(1000)*/
+        await Alltestcases.inputform()
         
-        const frominputfield = page.locator('#searchForm-singleBound-origin-input')
+        /*const frominputfield = page.locator('#searchForm-singleBound-origin-input')
         await frominputfield.fill('lahore')
-        await expect(frominputfield).toBeVisible()
-        
-        const dropval = page.locator('#react-select-4-option-0')
+        await expect(frominputfield).toBeVisible()*/
+        await Alltestcases.value()
+        await Alltestcases.destinationvalue()
+        await Alltestcases.destinationdropvalue()
+        await Alltestcases.clickondeparturedate()
+        /*const dropval = page.locator('#react-select-4-option-0')
         await expect(dropval).toHaveText('Lahore, Pakistan')
         await dropval.click()
         
@@ -73,6 +77,6 @@ test.describe('Flight with assertion', () => {
         await nonstopcheckbox.click()
         
         const clicksearchfligt = page.locator('.b0x94f1')
-        await clicksearchfligt.nth(2).click()
+        await clicksearchfligt.nth(2).click()*/
     })
 })
