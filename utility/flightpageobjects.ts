@@ -11,6 +11,9 @@ export class allTestCases {
     firstDate
     returndate
     lastdate
+    slectadult
+    addadult
+    addchild
     constructor(page: Page) {
         this.page = page;
         this.acceptBtn = page.getByRole('button', { name: 'Accept All' });
@@ -22,6 +25,9 @@ export class allTestCases {
         this.firstDate = page.getByRole('gridcell', { name: '6 $', exact: true })
         this.returndate = page.getByTestId('singleBound.returnDate-input')
         this.lastdate = page.getByRole('gridcell', { name: '16 $' })
+        this.slectadult = page.getByTestId('searchForm-passengers-dropdown')
+        this.addadult = page.getByTestId('adults-passengers-add')
+        this.addchild = page.getByTestId('children-passengers-add')
     }
     async acceptCookies() {
         await expect(this.acceptBtn).toHaveText('Accept All');
@@ -57,6 +63,18 @@ export class allTestCases {
         await expect(this.lastdate).toBeVisible()
         await this.lastdate.click()
         await expect(this.returndate).toHaveValue('2025-01-16')
+    }
+    async selectpassengers(){
+        await expect(this.slectadult).toHaveText('1 adult')
+        await this.slectadult.click()
+    }
+    async Addadults(){
+        await this.addadult.click()
+        await expect(this.slectadult).toHaveText('2 adults')
+    }
+    async Addchlids(){
+        await this.addchild.click()
+        await expect(this.slectadult).toHaveText('2 adults, 1 child')
     }
 }
 
