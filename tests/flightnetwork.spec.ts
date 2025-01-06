@@ -143,7 +143,4 @@ test.describe('Flight Network',()=>{
         // await page.waitForLoadState()
         //await page.waitForEvent('load')
     })
-    test('tc06',async({page})=>{
-
-    })
 })

@@ -14,6 +14,12 @@ export class allTestCases {
     slectadult
     addadult
     addchild
+    addinfant
+    monthclick
+    classbook
+    optprem
+    nonstopcheckbox
+    clicksearchfligt
     constructor(page: Page) {
         this.page = page;
         this.acceptBtn = page.getByRole('button', { name: 'Accept All' });
@@ -22,12 +28,18 @@ export class allTestCases {
         this.toinputfield= page.locator('#searchForm-singleBound-destination-input')
         this.dorpva = page.locator('#react-select-7-option-0')
         this.departureDate = page.getByTestId('singleBound.departureDate-input')
-        this.firstDate = page.getByRole('gridcell', { name: '6 $', exact: true })
-        this.returndate = page.getByTestId('singleBound.returnDate-input')
+        this.firstDate = page.getByRole('gridcell', { name: '22' })
+       this.returndate = page.getByTestId('singleBound.returnDate-input')
         this.lastdate = page.getByRole('gridcell', { name: '16 $' })
         this.slectadult = page.getByTestId('searchForm-passengers-dropdown')
         this.addadult = page.getByTestId('adults-passengers-add')
         this.addchild = page.getByTestId('children-passengers-add')
+        this.addinfant = page.getByTestId('infants-passengers-add')
+        this.monthclick = page.getByLabel('Go to next month')
+        this.classbook = page.getByTestId('searchForm-cabinClasses-dropdown')
+        this.optprem = page.getByTestId('etiDropdownOption')
+        this.nonstopcheckbox = page.locator('.css-12v1e3v')
+        this.clicksearchfligt = page.locator('.b0x94f1')
     }
     async acceptCookies() {
         await expect(this.acceptBtn).toHaveText('Accept All');
@@ -55,14 +67,19 @@ export class allTestCases {
     }
     async selectfirstdate(){
         await this.firstDate.click()
-        await expect(this.departureDate).toHaveValue('2025-01-06')
+        await expect(this.departureDate).toHaveValue('2025-01-22')
     }
-    async clickonreturndate(){
+    /*async clickonreturndate(){
+        await this.returndate.click()
+    }*/
+    async clickonnextmonth(){
+        await expect(this.monthclick).toBeVisible()
+        await this.monthclick.click()
     }
     async selectreturndate(){
         await expect(this.lastdate).toBeVisible()
         await this.lastdate.click()
-        await expect(this.returndate).toHaveValue('2025-01-16')
+        await expect(this.returndate).toHaveValue('2025-02-16')
     }
     async selectpassengers(){
         await expect(this.slectadult).toHaveText('1 adult')
@@ -75,6 +92,24 @@ export class allTestCases {
     async Addchlids(){
         await this.addchild.click()
         await expect(this.slectadult).toHaveText('2 adults, 1 child')
+    }
+    async AddInfants(){
+        await this.addinfant.click()
+        await expect(this.slectadult).toHaveText('2 adults, 1 child, 1 infant')
+    }
+    async Addclass(){
+        await this.classbook.click()
+    }
+    async selectprem(){
+        await this.optprem.nth(1).click()
+        await expect(this.classbook).toHaveText('Premium')
+    }
+    async flightcheckbox(){
+        await expect(this.nonstopcheckbox).toHaveText('Nonstop flights only')
+        await this.nonstopcheckbox.click()
+    }
+    async clickonsearchbtn(){
+        await this.clicksearchfligt.nth(2).click()
     }
 }
 
