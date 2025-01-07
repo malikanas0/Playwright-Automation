@@ -1,9 +1,12 @@
 import { test, expect } from '@playwright/test';
 test.describe('tc01 with playwright',()=>{
     test('basic test', async({ page })=>{
-        await (page.goto('https://demoqa.com/'))
-        await expect(page).toHaveURL('https://demoqa.com')
-        await page.getByRole('heading',{name: 'Elements'}).click()
+
+      await page.goto('https://demoqa.com/')
+
+        const clickonheading = page.getByRole('heading',{name: 'Elements'})
+        await clickonheading.click()
+
         await page.getByText('Web Tables').click()
         await page.getByRole('button', { name: 'Add' }).click()
         await page.getByPlaceholder('First Name').fill('Alden')

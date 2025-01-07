@@ -22,6 +22,11 @@ export class allTestCases {
     nonstopcheckbox
     clicksearchfligt
     oneway
+    fromfield
+    selectcountry
+    tofield
+    selecttocountry
+    
     constructor(page: Page) {
         this.page = page;
        this.gotoweb= page.goto('https://us-en.flightnetwork.com/rf/start')
@@ -44,7 +49,12 @@ export class allTestCases {
         this.nonstopcheckbox = page.locator('.css-12v1e3v')
         this.clicksearchfligt = page.locator('.b0x94f1')
         this.oneway =page.getByText('One-Way')
+        this.fromfield = page.locator('#searchForm-singleBound-origin-input')
+        this.selectcountry =page.locator('#react-select-6-option-0')
+        this.tofield = page.locator('#searchForm-singleBound-destination-input')
+        this.selecttocountry=page.locator('#react-select-9-option-0')
     }
+
     async sitevisit(){
         //await expect(this.gotoweb).toHaveURL('https://us-en.flightnetwork.com/rf/start')
     }
@@ -122,6 +132,20 @@ export class allTestCases {
     async clickoneway(){
         await this.oneway.click()
         await expect(this.oneway).toHaveText('One-Way')
+    }
+    async onewayfromfield(){   
+       await this.fromfield.fill('lahore')
+       await expect(this.tofield).toHaveText('Lahore')
+    }
+    async selectfromoption(){
+        await this.selectcountry.click()
+        //await expect(this.fromfield).toHaveText('Lahore, Pakistan')
+    }
+    async onewayformallinputs(){
+        await this.tofield.fill('karachi')
+        await this.selecttocountry.click()
+        
+        //await expect(this.tofield).toHaveText('Karachi')
     }
 }
 

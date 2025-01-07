@@ -28,5 +28,8 @@ test.describe('Flight with assertion', () => {
         await Alltestcases.sitevisit()
         await Alltestcases.acceptCookies()
         await Alltestcases.clickoneway()
+        await Alltestcases.onewayfromfield()
+        await Alltestcases.selectfromoption()
+        await Alltestcases.onewayformallinputs()
     })
 })

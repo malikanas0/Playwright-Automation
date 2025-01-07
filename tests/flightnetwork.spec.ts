@@ -41,17 +41,73 @@ test.describe('Flight Network',()=>{
     })
     test('tc02',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
+        const acceptBtn = page.getByRole('button', { name: 'Accept All' })
+        await expect(acceptBtn).toHaveText('Accept All')
+        await acceptBtn.click()
+
+        const clickononeway = page.getByText('One-Way')
+        await clickononeway.click()
+
+        const fromfield = page.locator('#searchForm-singleBound-origin-input')
+       await fromfield.fill('lahore')
+       const countryinput = page.locator('#react-select-6-option-0')
+       await countryinput.click()
+       
+       const tofields = page.locator('#searchForm-singleBound-destination-input')
+       await tofields.fill('karachi')
+       const selecttocount = page.locator('#react-select-9-option-0')
+        await selecttocount.click()
+
+        const depdate = page.getByTestId('singleBound.departureDate-input')
+        await depdate.click()
+        const dateselect =page.getByRole('gridcell', { name: '31 $' })
+        await dateselect.click()
+        await expect(depdate).toHaveValue('2025-01-31')
+
+        const addpassengers = page.getByTestId('searchForm-passengers-dropdown')
+        await addpassengers.click()
+        await expect(addpassengers).toHaveText('1 adult')
+
+        const addchildern = page.getByTestId('children-passengers-add')
+        await addchildern.click()
+        await expect(addpassengers).toHaveText('1 adult, 1 child')
+
+        const addinfant = page.getByTestId('infants-passengers-add')
+        await addinfant.click()
+        await expect(addpassengers).toHaveText('1 adult, 1 child, 1 infant')
+
+        const Addclass = page.getByTestId('searchForm-cabinClasses-dropdown')
+        await Addclass.click()
+        await expect(Addclass).toHaveText('Economy')
+
+        const selectclassopt = page.getByRole('option', { name: 'Premium' })
+        await selectclassopt.click()
+        await expect(Addclass).toHaveText('Premium')
+
+        const searchbox = page.getByTestId('directFlight-input')
+        await searchbox.click()
+
+        const clickonsearchbtn = page.getByTestId('searchForm-searchFlights-button')
+        await clickonsearchbtn.click()
+        
+
+        /*await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()
         await page.waitForTimeout(1000)
         await page.getByText('One-Way').click()
-       
-        await page.getByTestId('searchForm-singleBound-origin-input').locator('div').filter({ hasText: 'From' }).nth(3).click()
-        await page.keyboard.type('lahore')
+       const fromfield = page.locator('#searchForm-singleBound-origin-input')
+       await fromfield.fill('lahore')
+        //await page.getByTestId('searchForm-singleBound-origin-input').locator('div').filter({ hasText: 'From' }).nth(3).click()
+        //await page.keyboard.type('lahore')
         await page.waitForTimeout(1000)
         await page.locator('#react-select-6-option-0').click()
+
         await page.getByTestId('searchForm-singleBound-destination-input').locator('div').filter({ hasText: 'To' }).nth(3).click()
         await page.keyboard.type('karachi')
         await page.waitForTimeout(1000)
+        const selecttocount = page.locator('#react-select-9-option-0')
+        await selecttocount.click()
+        await 
         await page.locator('#react-select-9-option-0').click()
         await page.waitForTimeout(1000)
         await page.getByTestId('singleBound.departureDate-input').click()
@@ -61,7 +117,7 @@ test.describe('Flight Network',()=>{
         await page.getByTestId('infants-passengers-add').click()
         await page.getByTestId('directFlight-input').click()
         await page.getByTestId('searchForm-searchFlights-button').click()
-        await page.waitForTimeout(2000)
+        await page.waitForTimeout(2000)*/
     })
     test('tc03',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
