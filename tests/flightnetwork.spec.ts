@@ -41,6 +41,7 @@ test.describe('Flight Network',()=>{
     })
     test('tc02',async({page})=>{
         await page.goto('https://us-en.flightnetwork.com/rf/start')
+        
         const acceptBtn = page.getByRole('button', { name: 'Accept All' })
         await expect(acceptBtn).toHaveText('Accept All')
         await acceptBtn.click()
@@ -89,7 +90,7 @@ test.describe('Flight Network',()=>{
 
         const clickonsearchbtn = page.getByTestId('searchForm-searchFlights-button')
         await clickonsearchbtn.click()
-        
+
 
         /*await page.goto('https://us-en.flightnetwork.com/rf/start')
         await page.getByRole('button', { name: 'Accept All' }).click()

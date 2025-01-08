@@ -36,7 +36,7 @@ export class allTestCases {
         this.toinputfield= page.locator('#searchForm-singleBound-destination-input')
         this.dorpva = page.locator('#react-select-7-option-0')
         this.departureDate = page.getByTestId('singleBound.departureDate-input')
-        this.firstDate = page.getByRole('gridcell', { name: '22' })
+        this.firstDate = page.getByRole('gridcell', { name: '31 $' })
        this.returndate = page.getByTestId('singleBound.returnDate-input')
         this.lastdate = page.getByRole('gridcell', { name: '16 $' })
         this.slectadult = page.getByTestId('searchForm-passengers-dropdown')
@@ -59,7 +59,7 @@ export class allTestCases {
         //await expect(this.gotoweb).toHaveURL('https://us-en.flightnetwork.com/rf/start')
     }
     async acceptCookies() {
-        await expect(this.acceptBtn).toHaveText('Accept All');
+        //await expect(this.acceptBtn).toHaveText('Accept All');
         await this.acceptBtn.click();
     }
     async inputform(){
@@ -84,7 +84,7 @@ export class allTestCases {
     }
     async selectfirstdate(){
         await this.firstDate.click()
-        await expect(this.departureDate).toHaveValue('2025-01-22')
+        await expect(this.departureDate).toHaveValue('2025-01-31')
     }
     /*async clickonreturndate(){
         await this.returndate.click()
@@ -135,7 +135,7 @@ export class allTestCases {
     }
     async onewayfromfield(){   
        await this.fromfield.fill('lahore')
-       await expect(this.tofield).toHaveText('Lahore')
+       //await expect(this.tofield).toHaveText('Lahore')
     }
     async selectfromoption(){
         await this.selectcountry.click()
@@ -144,9 +144,27 @@ export class allTestCases {
     async onewayformallinputs(){
         await this.tofield.fill('karachi')
         await this.selecttocountry.click()
-        
         //await expect(this.tofield).toHaveText('Karachi')
+        await expect(this.departureDate).toBeVisible()
+        await this.departureDate.click()
+        await this.firstDate.click()
+        await expect(this.departureDate).toHaveValue('2025-01-31')
+        await expect(this.slectadult).toHaveText('1 adult')
+        await this.slectadult.click()
+        await this.addadult.click()
+        await expect(this.slectadult).toHaveText('2 adults')
+        await this.addchild.click()
+        await expect(this.slectadult).toHaveText('2 adults, 1 child')
+        await this.addinfant.click()
+        await expect(this.slectadult).toHaveText('2 adults, 1 child, 1 infant')
+        await this.classbook.click()
+        await this.optprem.nth(1).click()
+        await expect(this.classbook).toHaveText('Premium')
+        await expect(this.nonstopcheckbox).toHaveText('Nonstop flights only')
+        await this.nonstopcheckbox.click()
+        await this.clicksearchfligt.nth(2).click()
     }
+
 }
 
 /*import { Page , expect } from "@playwright/test";

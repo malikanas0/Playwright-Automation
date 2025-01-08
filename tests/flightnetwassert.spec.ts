@@ -32,4 +32,7 @@ test.describe('Flight with assertion', () => {
         await Alltestcases.selectfromoption()
         await Alltestcases.onewayformallinputs()
     })
+    test('tc03',async({page})=>{
+        
+    })
 })
